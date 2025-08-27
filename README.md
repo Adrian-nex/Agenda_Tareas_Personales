@@ -5,7 +5,7 @@
 
 ---
 
-## 📖 Descripción  
+## 📖  Descripción  
 Aplicación **CRUD en Django** que permite gestionar una **Agenda de Tareas Personales**:  
 
 - **Título**: Nombre de la tarea  
