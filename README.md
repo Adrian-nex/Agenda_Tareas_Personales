@@ -24,7 +24,7 @@ Se usó **GitHub** con ramas (`main`, `caracteristicas/plantillas`, `desarrollo`
 | Scrum Master               | Adrian Gallardo   |
 | Product Owner (Simulado)   | Camila Romero     |
 | Dev Frontend (HTML + CSS)  | Leonardo Ramos    |
-| Dev Frontend (HTML + CSS)  | Boris Dominguez   |
+| Dev Frontend (CSS)         | Boris Dominguez   |
 | Dev Backend (Python/Django)| Fabiano Anticona  |
 
 ---
