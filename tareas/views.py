@@ -12,7 +12,7 @@ class TaskListView(ListView):
     context_object_name = 'tasks'
 
     # RUTA DEL TEMPLATE QUE SE USARA PARA RENDERIZAR LA LISTA
-    template_name = 'listar.html'
+    template_name = 'tareas/listar.html'
     
     # PERSONALIZAR LA CONSULTA DE OBJETOS (QUERYSET)
     def get_queryset(self):
@@ -42,7 +42,7 @@ class TaskDetailView(DetailView):
     context_object_name = 'task'
 
     # RUTA AL TEMPLATE PARA MOSTRAR LOS DETALLES DE LA TAREA
-    template_name = 'detalles.html'
+    template_name = 'tareas/detalles.html'
 
 # VISTA QUE PERMITE CREAR UNA NUEVA TAREA USANDO UN FORMULARIO
 class TaskCreateView(CreateView):
@@ -52,7 +52,7 @@ class TaskCreateView(CreateView):
     form_class = TaskForm
 
     # TEMPLATE DONDE SE MUESTRA EL FORMULARIO
-    template_name = 'formulario.html'
+    template_name = 'tareas/formulario.html'
 
     # URL A LA QUE SE REDIRIGE DESPUES DE CREAR CORRECTAMENTE
     success_url = reverse_lazy('task_list')
@@ -73,7 +73,7 @@ class TaskUpdateView(UpdateView):
     form_class = TaskForm
 
     # TEMPLATE QUE SE REUTILIZA PARA EDICIÓN
-    template_name = 'formulario.html'
+    template_name = 'tareas/formulario.html'
 
     # REDIRIGE AL DETALLE DE LA TAREA DESPUÉS DE EDITARLA
     def get_success_url(self):
@@ -84,7 +84,7 @@ class TaskDeleteView(DeleteView):
     model = Task
 
     # TEMPLATE PARA CONFIRMAR EL BORRADO
-    template_name = 'eliminar.html'
+    template_name = 'tareas/eliminar.html'
 
     # REDIRIGE A LA LISTA DE TAREAS TRAS ELIMINAR LA ACTUAL
     success_url = reverse_lazy('task_list')

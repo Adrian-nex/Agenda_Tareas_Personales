@@ -1,0 +1,82 @@
+{% extends 'tareas/base.html' %}
+
+{% block content %}
+<h1 class="mb-4">Lista de Tareas</h1>
+
+<div class="row mb-4">
+    <div class="col-md-6">
+        <form method="get" class="d-flex">
+            <select name="status" class="form-select me-2">
+                <option value="">Todos los estados</option>
+                <option value="pending" {% if request.GET.status == 'pending' %}selected{% endif %}>Pendiente</option>
+                <option value="in_progress" {% if request.GET.status == 'in_progress' %}selected{% endif %}>En Progreso</option>
+                <option value="completed" {% if request.GET.status == 'completed' %}selected{% endif %}>Completada</option>
+            </select>
+            <select name="priority" class="form-select me-2">
+                <option value="">Todas las prioridades</option>
+                <option value="high" {% if request.GET.priority == 'high' %}selected{% endif %}>Alta</option>
+                <option value="medium" {% if request.GET.priority == 'medium' %}selected{% endif %}>Media</option>
+                <option value="low" {% if request.GET.priority == 'low' %}selected{% endif %}>Baja</option>
+            </select>
+            <button type="submit" class="btn btn-primary">Filtrar</button>
+        </form>
+    </div>
+    <div class="col-md-6 text-end">
+        <a href="{% url 'task_create' %}" class="btn btn-success">Nueva Tarea</a>
+    </div>
+</div>
+
+<div class="row">
+    {% for task in tasks %}
+    <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card {% if task.is_overdue %}border-danger{% endif %}">
+            <div class="card-body">
+                <h5 class="card-title">{{ task.title }}</h5>
+                
+                <div class="mb-2">
+                    <span class="badge 
+                        {% if task.priority == 'high' %}bg-danger
+                        {% elif task.priority == 'medium' %}bg-warning
+                        {% else %}bg-info{% endif %}">
+                        {{ task.get_priority_display }}
+                    </span>
+                    
+                    <span class="badge 
+                        {% if task.status == 'completed' %}bg-success
+                        {% elif task.status == 'in_progress' %}bg-primary
+                        {% else %}bg-secondary{% endif %}">
+                        {{ task.get_status_display }}
+                    </span>
+                    
+                    {% if task.is_overdue %}
+                    <span class="badge bg-danger">Atrasada</span>
+                    {% endif %}
+                </div>
+                
+                <p class="card-text">
+                    {% if task.description|length > 100 %}
+                        {{ task.description|slice:":100" }}...
+                    {% else %}
+                        {{ task.description }}
+                    {% endif %}
+                </p>
+                
+                <p class="card-text">
+                    <small class="text-muted">Vence: {{ task.due_date }}</small>
+                </p>
+                
+                <div class="d-flex justify-content-between">
+                    <a href="{% url 'task_detail' task.pk %}" class="btn btn-sm btn-outline-primary">Ver</a>
+                    <a href="{% url 'task_update' task.pk %}" class="btn btn-sm btn-outline-secondary">Editar</a>
+                    <a href="{% url 'task_delete' task.pk %}" class="btn btn-sm btn-outline-danger">Eliminar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+        <div class="alert alert-info custom-alert">No hay tareas registradas.</div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
